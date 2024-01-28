@@ -1,26 +1,26 @@
-package ibm.space;
+package ibm.space.SpaceMember;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum SpaceType {
-    CPD("cpd"),
-    WX("wx"),
-    WCA("wca");
+public enum SpaceMemberType {
+    USER("user"),
+    SERVICE("service"),
+    GROUP("group");
 
-    private static final Map<String, SpaceType> VALUE_MAP = new HashMap<>();
+    private static final Map<String, SpaceMemberType> VALUE_MAP = new HashMap<>();
 
     static {
-        for (SpaceType type : SpaceType.values()) {
+        for (SpaceMemberType type : SpaceMemberType.values()) {
             VALUE_MAP.put(type.value, type);
         }
     }
 
     private final String value;
 
-    SpaceType(String value) {
+    SpaceMemberType(String value) {
         this.value = value;
     }
 
@@ -30,7 +30,7 @@ public enum SpaceType {
     }
 
     @JsonCreator
-    public static SpaceType fromValue(String value) {
+    public static SpaceMemberType fromValue(String value) {
         return VALUE_MAP.get(value.toLowerCase());
     }
 }

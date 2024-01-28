@@ -1,55 +1,61 @@
 package ibm.space.SpaceStorage;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SpaceStorageProperties {
-    private String resource_crn;
+    @JsonProperty("resource_crn")
+    private String resourceCrn;
     private String guid;
-    private String bucket_name;
-    private String bucket_region;
-    private String endpoint_url;
+    @JsonProperty("bucket_name")
+    private String bucketName;
+    @JsonProperty("bucket_region")
+    private String bucketRegion;
+    @JsonProperty("endpoint_url")
+    private String endpointUrl;
     private SpaceStorageCredentialsFull credentials;
-    private Boolean key_protect;
-    
-    
-    @Override
-    public String toString() {
-        return "SpaceStorageProperties [resource_crn=" + resource_crn + ", guid=" + guid + ", bucket_name="
-                + bucket_name + ", bucket_region=" + bucket_region + ", endpoint_url=" + endpoint_url + ", credentials="
-                + credentials.toString() + ", key_protect=" + key_protect + "]";
+    @JsonProperty("key_protect")
+    private Boolean keyProtect;
+
+    public String getResourceCrn() {
+        return resourceCrn;
     }
-    public SpaceStorageProperties() {
-    }
-    public String getResource_crn() {
-        return resource_crn;
-    }
+
     public String getGuid() {
         return guid;
     }
-    public String getBucket_name() {
-        return bucket_name;
+
+    public String getBucketName() {
+        return bucketName;
     }
-    public String getBucket_region() {
-        return bucket_region;
+
+    public String getBucketRegion() {
+        return bucketRegion;
     }
-    public String getEndpoint_url() {
-        return endpoint_url;
+
+    public String getEndpointUrl() {
+        return endpointUrl;
     }
+
     public SpaceStorageCredentialsFull getCredentials() {
         return credentials;
     }
-    public Boolean getKey_protect() {
-        return key_protect;
-    }
-    public SpaceStorageProperties(String resource_crn, String guid, String bucket_name, String bucket_region,
-            String endpoint_url, SpaceStorageCredentialsFull credentials, Boolean key_protect) {
-        this.resource_crn = resource_crn;
-        this.guid = guid;
-        this.bucket_name = bucket_name;
-        this.bucket_region = bucket_region;
-        this.endpoint_url = endpoint_url;
-        this.credentials = credentials;
-        this.key_protect = key_protect;
+
+    public Boolean getKeyProtect() {
+        return keyProtect;
     }
 
-    
+    public SpaceStorageProperties() {
+    }
+
+    public SpaceStorageProperties(String resourceCrn, String guid, String bucketName, String bucketRegion,
+            String endpointUrl, SpaceStorageCredentialsFull credentials, Boolean keyProtect) {
+        this.resourceCrn = resourceCrn;
+        this.guid = guid;
+        this.bucketName = bucketName;
+        this.bucketRegion = bucketRegion;
+        this.endpointUrl = endpointUrl;
+        this.credentials = credentials;
+        this.keyProtect = keyProtect;
+    }
+
 }

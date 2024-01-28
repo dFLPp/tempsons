@@ -6,10 +6,6 @@ public class SpaceCompute {
     private String guid;
     private String type = "machine_learning";
     
-    @Override
-    public String toString() {
-        return "SpaceCompute [name=" + name + ", crn=" + crn + ", guid=" + guid + ", type=" + type + "]";
-    }
     public SpaceCompute() {
     }
     public String getName() {

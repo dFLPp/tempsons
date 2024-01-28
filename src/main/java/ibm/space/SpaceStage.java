@@ -4,12 +4,6 @@ public class SpaceStage {
     private Boolean production;
     private String name;
 
-    
-
-    @Override
-    public String toString() {
-        return "SpaceStage [production=" + production + ", name=" + name + "]";
-    }
     public SpaceStage() {
     }
     public Boolean getProduction() {

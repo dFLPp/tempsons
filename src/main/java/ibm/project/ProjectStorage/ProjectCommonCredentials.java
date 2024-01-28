@@ -1,10 +1,10 @@
-package ibm.space.SpaceStorage;
+package ibm.project.ProjectStorage;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SpaceStorageCommonCredentials {
+public class ProjectCommonCredentials {
     @JsonProperty("api_key")
-    private String apiKey;
+    private String apikey;
     @JsonProperty("service_id")
     private String serviceId;
     @JsonProperty("access_key_id")
@@ -13,35 +13,30 @@ public class SpaceStorageCommonCredentials {
     private String secretAccessKey;
     @JsonProperty("resource_key_crn")
     private String resourceKeyCrn;
-
-    public SpaceStorageCommonCredentials() {
+    
+    public ProjectCommonCredentials() {
     }
-
-    public SpaceStorageCommonCredentials(String apiKey, String serviceId, String accessKeyId, String secretAccessKey,
+    
+    public ProjectCommonCredentials(String apikey, String serviceId, String accessKeyId, String secretAccessKey,
             String resourceKeyCrn) {
-        this.apiKey = apiKey;
+        this.apikey = apikey;
         this.serviceId = serviceId;
         this.accessKeyId = accessKeyId;
         this.secretAccessKey = secretAccessKey;
         this.resourceKeyCrn = resourceKeyCrn;
     }
-
-    public String getApiKey() {
-        return apiKey;
+    public String getApikey() {
+        return apikey;
     }
-
     public String getServiceId() {
         return serviceId;
     }
-
     public String getAccessKeyId() {
         return accessKeyId;
     }
-
     public String getSecretAccessKey() {
         return secretAccessKey;
     }
-
     public String getResourceKeyCrn() {
         return resourceKeyCrn;
     }

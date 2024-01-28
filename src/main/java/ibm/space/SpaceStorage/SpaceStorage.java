@@ -6,11 +6,6 @@ public class SpaceStorage {
     
     public SpaceStorage() {
     }
-    
-    @Override
-    public String toString() {
-        return "SpaceStorage [type=" + type + ", properties=" + properties.toString() + "]";
-    }
 
     public String getType() {
         return type;

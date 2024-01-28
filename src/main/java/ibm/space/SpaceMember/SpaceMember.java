@@ -1,15 +1,11 @@
-package ibm.space.spaceMember;
+package ibm.space.SpaceMember;
 
 public class SpaceMember {
     private SpaceMemberRole role;
     private String id;
     private SpaceMemberState state;
     private SpaceMemberType type;
-    
-    @Override
-    public String toString() {
-        return "SpaceMember [role=" + role + ", id=" + id + ", state=" + state + ", type=" + type + "]";
-    }
+
     public SpaceMember() {
     }
     public SpaceMemberRole getRole() {

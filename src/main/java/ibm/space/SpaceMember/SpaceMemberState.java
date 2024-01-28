@@ -1,28 +1,25 @@
-package ibm.space.SpaceStatus;
+package ibm.space.SpaceMember;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum SpaceStatusState {
-    PREPARING("preparing"),
+public enum SpaceMemberState {
     ACTIVE("active"),
-    DELETING("deleting"),
-    DELETED("deleted"),
-    ERROR("error");
+    PENDING("pending");
 
-    private static final Map<String, SpaceStatusState> VALUE_MAP = new HashMap<>();
+    private static final Map<String, SpaceMemberState> VALUE_MAP = new HashMap<>();
 
     static {
-        for (SpaceStatusState state : SpaceStatusState.values()) {
+        for (SpaceMemberState state : SpaceMemberState.values()) {
             VALUE_MAP.put(state.value, state);
         }
     }
 
     private final String value;
 
-    SpaceStatusState(String value) {
+    SpaceMemberState(String value) {
         this.value = value;
     }
 
@@ -32,7 +29,7 @@ public enum SpaceStatusState {
     }
 
     @JsonCreator
-    public static SpaceStatusState fromValue(String value) {
+    public static SpaceMemberState fromValue(String value) {
         return VALUE_MAP.get(value.toLowerCase());
     }
 }

@@ -1,22 +1,19 @@
 package ibm.space;
 
-public class SpaceScope {
-    private String bss_account_id;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public String getBss_account_id() {
-        return bss_account_id;
+public class SpaceScope {
+    @JsonProperty("bss_account_id")
+    private String bssAccountId;
+
+    public String getBssAccountId() {
+        return bssAccountId;
     }
-    
+
     public SpaceScope() {
     }
 
-    @Override
-    public String toString() {
-        return "SpaceScope [bss_account_id=" + bss_account_id + "]";
+    public SpaceScope(String bssAccountId) {
+        this.bssAccountId = bssAccountId;
     }
-
-    public SpaceScope(String bss_account_id) {
-        this.bss_account_id = bss_account_id;
-    }
-    
 }

@@ -2,42 +2,47 @@ package ibm.space;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Metadata {
     private String id;
     private String url;
-    private String creator_id;
-    private Date created_at;
-    private Date updated_at;
+    @JsonProperty("creator_id")
+    private String creatorId;
+    @JsonProperty("created_at")
+    private Date createdAt;
+    @JsonProperty("updated_at")
+    private Date updatedAt;
 
-    
-    @Override
-    public String toString() {
-        return "Metadata [id=" + id + ", url=" + url + ", creator_id=" + creator_id + ", created_at=" + created_at
-                + ", updated_at=" + updated_at + "]";
-    }
-    public Metadata() {
-    }
     public String getId() {
         return id;
     }
+
     public String getUrl() {
         return url;
     }
-    public String getCreator_id() {
-        return creator_id;
+
+    public String getCreatorId() {
+        return creatorId;
     }
-    public Date getCreated_at() {
-        return created_at;
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
-    public Date getUpdated_at() {
-        return updated_at;
+
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
-    public Metadata(String id, String url, String creator_id, Date created_at,
-            Date updated_at) {
+
+    public Metadata() {
+    }
+
+    public Metadata(String id, String url, String creatorId, Date createdAt, Date updatedAt) {
         this.id = id;
         this.url = url;
-        this.creator_id = creator_id;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.creatorId = creatorId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
+
 }
