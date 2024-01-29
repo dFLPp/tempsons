@@ -3,6 +3,7 @@ package dto.response.SpaceListReponse;
 import java.util.List;
 
 import ibm.space.Space;
+import jakarta.json.bind.annotation.JsonbCreator;
 
 public class SpaceListReponse {
     private Integer total_count;
@@ -26,6 +27,8 @@ public class SpaceListReponse {
     public List<Space> getResources() {
         return resources;
     }
+
+    @JsonbCreator
     public SpaceListReponse(Integer total_count, Integer limit, PositionObject first, PositionObject next,
             List<Space> resources) {
         this.total_count = total_count;
@@ -33,13 +36,5 @@ public class SpaceListReponse {
         this.first = first;
         this.next = next;
         this.resources = resources;
-    }
-    public SpaceListReponse() {
-    }
-    @Override
-    public String toString() {
-        return "SpaceListReponse [total_count=" + total_count + ", limit=" + limit + ", first=" + first.toString() + ", next="
-                + next.toString() + ", resources=" + resources.get(0).toString() + "]";
-    }
-    
+    }    
 }

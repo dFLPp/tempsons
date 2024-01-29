@@ -1,30 +1,37 @@
 package services;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import java.util.List;
 
 import dto.response.SpaceListReponse.SpaceListReponse;
+import ibm.space.Space;
+import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 
 @RequestScoped
 public class SpaceService {
 
-    public void teste() {
+    public List<Space> teste() throws Exception{
 
         try {
-            ObjectMapper mapper = new ObjectMapper()
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                    .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
-                    .findAndRegisterModules();
-
-            SpaceListReponse s = mapper.readValue(spaceListDTOMock(), SpaceListReponse.class);
-            System.out.println(s.getResources().get(1).getEntity().getStorage().getProperties().getBucketName());
-            System.out.println(s.toString());
+            Jsonb res = JsonbBuilder.create();
+            return res.fromJson(spaceListDTOMock(), SpaceListReponse.class).getResources();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("caiu no catch");
+            throw new Exception();
+        }
+    }
+
+    public JsonObject teste_json(Space space) throws Exception{
+        try {
+            Jsonb res = JsonbBuilder.create();
+            return new JsonObject(res.toJson(space));
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new Exception();
         }
     }
 

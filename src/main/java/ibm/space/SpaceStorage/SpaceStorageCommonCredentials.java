@@ -1,23 +1,34 @@
 package ibm.space.SpaceStorage;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class SpaceStorageCommonCredentials {
-    @JsonProperty("api_key")
+    @JsonbProperty("api_key")
     private String apiKey;
-    @JsonProperty("service_id")
+    @JsonbProperty("service_id")
     private String serviceId;
-    @JsonProperty("access_key_id")
+    @JsonbProperty("access_key_id")
     private String accessKeyId;
-    @JsonProperty("secret_access_key")
+    @JsonbProperty("secret_access_key")
     private String secretAccessKey;
-    @JsonProperty("resource_key_crn")
+    @JsonbProperty("resource_key_crn")
     private String resourceKeyCrn;
 
     public SpaceStorageCommonCredentials() {
     }
 
-    public SpaceStorageCommonCredentials(String apiKey, String serviceId, String accessKeyId, String secretAccessKey,
+    @JsonbCreator
+    public static SpaceStorageCommonCredentials create(
+            @JsonbProperty("api_key") String apiKey,
+            @JsonbProperty("service_id") String serviceId,
+            @JsonbProperty("access_key_id") String accessKeyId,
+            @JsonbProperty("secret_access_key") String secretAccessKey,
+            @JsonbProperty("resource_key_crn") String resourceKeyCrn) {
+        return new SpaceStorageCommonCredentials(apiKey, serviceId, accessKeyId, secretAccessKey, resourceKeyCrn);
+    }
+
+    private SpaceStorageCommonCredentials(String apiKey, String serviceId, String accessKeyId, String secretAccessKey,
             String resourceKeyCrn) {
         this.apiKey = apiKey;
         this.serviceId = serviceId;

@@ -1,6 +1,8 @@
 package ibm.space.SpaceStatus;
 
 import java.util.List;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class SpaceErrorObject {
     private String code;
@@ -24,13 +26,24 @@ public class SpaceErrorObject {
         return parameters;
     }
 
-    public SpaceErrorObject(String code, String message, String more_info, List<String> parameters) {
+    @JsonbCreator
+    public static SpaceErrorObject create(
+            @JsonbProperty("code") String code,
+            @JsonbProperty("message") String message,
+            @JsonbProperty("more_info") String more_info,
+            @JsonbProperty("parameters") List<String> parameters) {
+
+        return new SpaceErrorObject(code, message, more_info, parameters);
+    }
+
+    // Construtor padrão (vazio) para acomodar a deserialização do Jsonb
+    public SpaceErrorObject() {
+    }
+
+    private SpaceErrorObject(String code, String message, String more_info, List<String> parameters) {
         this.code = code;
         this.message = message;
         this.more_info = more_info;
         this.parameters = parameters;
-    }
-
-    public SpaceErrorObject() {
     }
 }

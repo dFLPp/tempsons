@@ -5,22 +5,21 @@ import java.util.List;
 import ibm.space.SpaceMember.SpaceMember;
 import ibm.space.SpaceStatus.SpaceStatus;
 import ibm.space.SpaceStorage.SpaceStorage;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class Entity {
     private String name;
     private SpaceScope scope;
     private SpaceStatus status;
     private SpaceStage stage;
-    private SpaceType type;
+    private String type;
     private String description;
     private SpaceStorage storage;
     private List<SpaceCompute> compute;
     private List<SpaceMember> members;
     private List<String> tags;
     private String generator;
-
-    public Entity() {
-    }
 
     public String getName() {
         return name;
@@ -38,7 +37,7 @@ public class Entity {
         return stage;
     }
 
-    public SpaceType getType() {
+    public String getType() {
         return type;
     }
 
@@ -66,9 +65,28 @@ public class Entity {
         return generator;
     }
 
-    public Entity(String name, SpaceScope scope, SpaceStatus status, SpaceStage stage, SpaceType type,
-            String description, SpaceStorage storage, List<SpaceCompute> compute, List<SpaceMember> members,
-            List<String> tags, String generator) {
+    @JsonbCreator
+    public static Entity create(
+            @JsonbProperty("name") String name,
+            @JsonbProperty("scope") SpaceScope scope,
+            @JsonbProperty("status") SpaceStatus status,
+            @JsonbProperty("stage") SpaceStage stage,
+            @JsonbProperty("type") String type,
+            @JsonbProperty("description") String description,
+            @JsonbProperty("storage") SpaceStorage storage,
+            @JsonbProperty("compute") List<SpaceCompute> compute,
+            @JsonbProperty("members") List<SpaceMember> members,
+            @JsonbProperty("tags") List<String> tags,
+            @JsonbProperty("generator") String generator) {
+
+        return new Entity(name, scope, status, stage, type, description, storage, compute, members, tags, generator);
+    }
+
+    
+
+    public Entity(String name, SpaceScope scope, SpaceStatus status, SpaceStage stage, String type, String description,
+            SpaceStorage storage, List<SpaceCompute> compute, List<SpaceMember> members, List<String> tags,
+            String generator) {
         this.name = name;
         this.scope = scope;
         this.status = status;
@@ -80,5 +98,9 @@ public class Entity {
         this.members = members;
         this.tags = tags;
         this.generator = generator;
+    }
+
+    // Construtor padrão (vazio) para acomodar a deserialização do Jsonb
+    public Entity() {
     }
 }

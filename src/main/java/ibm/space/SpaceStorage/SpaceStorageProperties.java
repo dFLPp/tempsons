@@ -1,19 +1,20 @@
 package ibm.space.SpaceStorage;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class SpaceStorageProperties {
-    @JsonProperty("resource_crn")
+    @JsonbProperty("resource_crn")
     private String resourceCrn;
     private String guid;
-    @JsonProperty("bucket_name")
+    @JsonbProperty("bucket_name")
     private String bucketName;
-    @JsonProperty("bucket_region")
+    @JsonbProperty("bucket_region")
     private String bucketRegion;
-    @JsonProperty("endpoint_url")
+    @JsonbProperty("endpoint_url")
     private String endpointUrl;
     private SpaceStorageCredentialsFull credentials;
-    @JsonProperty("key_protect")
+    @JsonbProperty("key_protect")
     private Boolean keyProtect;
 
     public String getResourceCrn() {
@@ -47,7 +48,19 @@ public class SpaceStorageProperties {
     public SpaceStorageProperties() {
     }
 
-    public SpaceStorageProperties(String resourceCrn, String guid, String bucketName, String bucketRegion,
+    @JsonbCreator
+    public static SpaceStorageProperties create(
+            @JsonbProperty("resource_crn") String resourceCrn,
+            @JsonbProperty("guid") String guid,
+            @JsonbProperty("bucket_name") String bucketName,
+            @JsonbProperty("bucket_region") String bucketRegion,
+            @JsonbProperty("endpoint_url") String endpointUrl,
+            @JsonbProperty("credentials") SpaceStorageCredentialsFull credentials,
+            @JsonbProperty("key_protect") Boolean keyProtect) {
+        return new SpaceStorageProperties(resourceCrn, guid, bucketName, bucketRegion, endpointUrl, credentials, keyProtect);
+    }
+
+    private SpaceStorageProperties(String resourceCrn, String guid, String bucketName, String bucketRegion,
             String endpointUrl, SpaceStorageCredentialsFull credentials, Boolean keyProtect) {
         this.resourceCrn = resourceCrn;
         this.guid = guid;
@@ -57,5 +70,4 @@ public class SpaceStorageProperties {
         this.credentials = credentials;
         this.keyProtect = keyProtect;
     }
-
 }

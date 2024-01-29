@@ -1,26 +1,40 @@
 package ibm.space.SpaceMember;
 
-public class SpaceMember {
-    private SpaceMemberRole role;
-    private String id;
-    private SpaceMemberState state;
-    private SpaceMemberType type;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
-    public SpaceMember() {
-    }
-    public SpaceMemberRole getRole() {
+public class SpaceMember {
+    private String role;
+    private String id;
+    private String state;
+    private String type;
+
+    public String getRole() {
         return role;
     }
+
     public String getId() {
         return id;
     }
-    public SpaceMemberState getState() {
+
+    public String getState() {
         return state;
     }
-    public SpaceMemberType getType() {
+
+    public String getType() {
         return type;
     }
-    public SpaceMember(SpaceMemberRole role, String id, SpaceMemberState state, SpaceMemberType type) {
+
+    @JsonbCreator
+    public static SpaceMember create(
+            @JsonbProperty("role") String role,
+            @JsonbProperty("id") String id,
+            @JsonbProperty("state") String state,
+            @JsonbProperty("type") String type) {
+        return new SpaceMember(role, id, state, type);
+    }
+
+    private SpaceMember(String role, String id, String state, String type) {
         this.role = role;
         this.id = id;
         this.state = state;

@@ -1,18 +1,37 @@
 package ibm.space;
 
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class Metadata {
     private String id;
     private String url;
-    @JsonProperty("creator_id")
     private String creatorId;
-    @JsonProperty("created_at")
-    private Date createdAt;
-    @JsonProperty("updated_at")
-    private Date updatedAt;
+    private String createdAt;
+    private String updatedAt;
+
+    @JsonbCreator
+    public static Metadata create(
+            @JsonbProperty("id") String id,
+            @JsonbProperty("url") String url,
+            @JsonbProperty("creator_id") String creatorId,
+            @JsonbProperty("created_at") String createdAt,
+            @JsonbProperty("updated_at") String updatedAt) {
+
+        return new Metadata(id, url, creatorId, createdAt, updatedAt);
+    }
+
+    // Construtor padrão (vazio) para acomodar a deserialização do Jsonb
+    public Metadata() {
+    }
+
+    private Metadata(String id, String url, String creatorId, String createdAt, String updatedAt) {
+        this.id = id;
+        this.url = url;
+        this.creatorId = creatorId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public String getId() {
         return id;
@@ -26,23 +45,11 @@ public class Metadata {
         return creatorId;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
-
-    public Metadata() {
-    }
-
-    public Metadata(String id, String url, String creatorId, Date createdAt, Date updatedAt) {
-        this.id = id;
-        this.url = url;
-        this.creatorId = creatorId;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
 }

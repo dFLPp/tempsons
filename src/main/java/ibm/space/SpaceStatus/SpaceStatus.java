@@ -1,10 +1,13 @@
 package ibm.space.SpaceStatus;
 
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
+
 public class SpaceStatus {
-    private SpaceStatusState state;
+    private String state;
     private SpaceError failure;
 
-    public SpaceStatusState getState() {
+    public String getState() {
         return state;
     }
 
@@ -12,11 +15,20 @@ public class SpaceStatus {
         return failure;
     }
 
-    public SpaceStatus(SpaceStatusState state, SpaceError failure) {
-        this.state = state;
-        this.failure = failure;
+    @JsonbCreator
+    public static SpaceStatus create(
+            @JsonbProperty("state") String state,
+            @JsonbProperty("failure") SpaceError failure) {
+
+        return new SpaceStatus(state, failure);
     }
 
+    // Construtor padrão (vazio) para acomodar a deserialização do Jsonb
     public SpaceStatus() {
+    }
+
+    private SpaceStatus(String state, SpaceError failure) {
+        this.state = state;
+        this.failure = failure;
     }
 }

@@ -1,5 +1,7 @@
 package ibm.space.SpaceStorage;
 
+import jakarta.json.bind.annotation.JsonbCreator;
+
 public class SpaceStorageCredentialsFull {
     private SpaceStorageCommonCredentials viewer;
     private SpaceStorageCommonCredentials editor;
@@ -17,7 +19,15 @@ public class SpaceStorageCredentialsFull {
         return admin;
     }
 
-    public SpaceStorageCredentialsFull(SpaceStorageCommonCredentials viewer, SpaceStorageCommonCredentials editor,
+    @JsonbCreator
+    public static SpaceStorageCredentialsFull create(
+            SpaceStorageCommonCredentials viewer,
+            SpaceStorageCommonCredentials editor,
+            SpaceStorageAdminCredentials admin) {
+        return new SpaceStorageCredentialsFull(viewer, editor, admin);
+    }
+
+    private SpaceStorageCredentialsFull(SpaceStorageCommonCredentials viewer, SpaceStorageCommonCredentials editor,
             SpaceStorageAdminCredentials admin) {
         this.viewer = viewer;
         this.editor = editor;
@@ -26,5 +36,4 @@ public class SpaceStorageCredentialsFull {
 
     public SpaceStorageCredentialsFull() {
     }
-
 }
