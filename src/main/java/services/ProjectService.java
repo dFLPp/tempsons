@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 
-import ibm.project.Project;
+import br.com.bb.nia.ibm.resources.project.Project;
 import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped

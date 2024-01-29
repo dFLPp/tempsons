@@ -2,7 +2,7 @@ package dto.response.SpaceListReponse;
 
 import java.util.List;
 
-import ibm.space.Space;
+import br.com.bb.nia.ibm.resources.space.Space;
 import jakarta.json.bind.annotation.JsonbCreator;
 
 public class SpaceListReponse {

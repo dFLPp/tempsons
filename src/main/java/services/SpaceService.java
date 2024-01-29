@@ -2,8 +2,8 @@ package services;
 
 import java.util.List;
 
+import br.com.bb.nia.ibm.resources.space.Space;
 import dto.response.SpaceListReponse.SpaceListReponse;
-import ibm.space.Space;
 import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.json.bind.Jsonb;

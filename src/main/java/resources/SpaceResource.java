@@ -1,6 +1,6 @@
 package resources;
 
-import ibm.space.Space;
+import br.com.bb.nia.ibm.resources.space.Space;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
