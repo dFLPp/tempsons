@@ -1,37 +1,53 @@
 package br.com.bb.nia.ibm.resources.project.member;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class ProjectMember {
-    @JsonProperty("user_name")
+    @JsonbProperty("user_name")
     private String userName;
-    private ProjectMemberRole role;
+    private String role;
     private String id;
-    private ProjectMemberState state;
-    private ProjectMemberType type;
-    public String getUserName() {
-        return userName;
+    private String state;
+    private String type;
+
+    @JsonbCreator
+    public static ProjectMember create(
+            @JsonbProperty("user_name") String userName,
+            @JsonbProperty("role") String role,
+            @JsonbProperty("id") String id,
+            @JsonbProperty("state") String state,
+            @JsonbProperty("type") String type) {
+        return new ProjectMember(userName, role, id, state, type);
     }
-    public ProjectMemberRole getRole() {
-        return role;
-    }
-    public String getId() {
-        return id;
-    }
-    public ProjectMemberState getState() {
-        return state;
-    }
-    public ProjectMemberType getType() {
-        return type;
-    }
-    public ProjectMember() {
-    }
-    public ProjectMember(String userName, ProjectMemberRole role, String id, ProjectMemberState state,
-            ProjectMemberType type) {
+
+    private ProjectMember(String userName, String role, String id, String state, String type) {
         this.userName = userName;
         this.role = role;
         this.id = id;
         this.state = state;
         this.type = type;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    
 }

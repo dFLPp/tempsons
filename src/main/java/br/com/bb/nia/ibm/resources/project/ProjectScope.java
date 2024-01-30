@@ -1,19 +1,28 @@
 package br.com.bb.nia.ibm.resources.project;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class ProjectScope {
-    @JsonProperty("bss_account_id")
+    @JsonbProperty("bss_account_id")
     private String bssAccountId;
-    @JsonProperty("saml_instance_name")
+    @JsonbProperty("saml_instance_name")
     private String samlInstanceName;
-    @JsonProperty("enforce_members")
+    @JsonbProperty("enforce_members")
     private boolean enforceMembers;
 
     public ProjectScope() {
     }
 
-    public ProjectScope(String bssAccountId, String samlInstanceName, boolean enforceMembers) {
+    @JsonbCreator
+    public static ProjectScope create(
+            @JsonbProperty("bss_account_id") String bssAccountId,
+            @JsonbProperty("saml_instance_name") String samlInstanceName,
+            @JsonbProperty("enforce_members") boolean enforceMembers) {
+        return new ProjectScope(bssAccountId, samlInstanceName, enforceMembers);
+    }
+
+    private ProjectScope(String bssAccountId, String samlInstanceName, boolean enforceMembers) {
         this.bssAccountId = bssAccountId;
         this.samlInstanceName = samlInstanceName;
         this.enforceMembers = enforceMembers;
@@ -31,4 +40,3 @@ public class ProjectScope {
         return enforceMembers;
     }
 }
-

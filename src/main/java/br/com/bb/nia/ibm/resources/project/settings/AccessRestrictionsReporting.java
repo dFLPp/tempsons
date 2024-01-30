@@ -1,5 +1,8 @@
 package br.com.bb.nia.ibm.resources.project.settings;
 
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
+
 public class AccessRestrictionsReporting {
     private boolean authorized;
 
@@ -7,12 +10,13 @@ public class AccessRestrictionsReporting {
         return authorized;
     }
 
-    public AccessRestrictionsReporting() {
+    @JsonbCreator
+    public static AccessRestrictionsReporting create(
+            @JsonbProperty("authorized") boolean authorized) {
+        return new AccessRestrictionsReporting(authorized);
     }
 
-    public AccessRestrictionsReporting(boolean authorized) {
+    private AccessRestrictionsReporting(boolean authorized) {
         this.authorized = authorized;
     }
-
-    
 }

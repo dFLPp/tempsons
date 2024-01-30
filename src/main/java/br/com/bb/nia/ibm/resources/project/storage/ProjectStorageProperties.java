@@ -1,24 +1,34 @@
 package br.com.bb.nia.ibm.resources.project.storage;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class ProjectStorageProperties {
-    @JsonProperty("bucket_name")
+    @JsonbProperty("bucket_name")
     private String bucketName;
-    @JsonProperty("bucket_region")
-    private ProjectStorageBucketRegion bucketRegion;
+    @JsonbProperty("bucket_region")
+    private String bucketRegion;
     private ProjectCredentialsFull credentials;
-    @JsonProperty("key_protect")
+    @JsonbProperty("key_protect")
     private boolean keyProtect;
 
     public ProjectStorageProperties() {
+    }
+
+    @JsonbCreator
+    public static ProjectStorageProperties create(
+            @JsonbProperty("bucket_name") String bucketName,
+            @JsonbProperty("bucket_region") String bucketRegion,
+            @JsonbProperty("credentials") ProjectCredentialsFull credentials,
+            @JsonbProperty("key_protect") boolean keyProtect) {
+        return new ProjectStorageProperties(bucketName, bucketRegion, credentials, keyProtect);
     }
 
     public String getBucketName() {
         return bucketName;
     }
 
-    public ProjectStorageBucketRegion getBucketRegion() {
+    public String getBucketRegion() {
         return bucketRegion;
     }
 
@@ -30,15 +40,11 @@ public class ProjectStorageProperties {
         return keyProtect;
     }
 
-    public ProjectStorageProperties(String bucketName, ProjectStorageBucketRegion bucketRegion,
+    private ProjectStorageProperties(String bucketName, String bucketRegion,
             ProjectCredentialsFull credentials, boolean keyProtect) {
         this.bucketName = bucketName;
         this.bucketRegion = bucketRegion;
         this.credentials = credentials;
         this.keyProtect = keyProtect;
     }
-
-    
-    
-    
 }

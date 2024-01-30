@@ -1,6 +1,7 @@
 package br.com.bb.nia.ibm.resources.project;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 import br.com.bb.nia.ibm.generic.Github;
 import br.com.bb.nia.ibm.resources.project.member.ProjectMember;
@@ -12,11 +13,11 @@ import java.util.List;
 public class ProjectEntity {
     private String name;
     private String description;
-    private ProjectType type;
-    @JsonProperty("public")
+    private String type;
+    @JsonbProperty("public")
     private boolean isPublic;
     private String creator;
-    @JsonProperty("creator_iam_id")
+    @JsonbProperty("creator_iam_id")
     private String creatorIamId;
     private ProjectScope scope;
     private ProjectStorage storage;
@@ -24,14 +25,32 @@ public class ProjectEntity {
     private Github github;
     private ProjectSettings settings;
     private List<ProjectMember> members;
-    private List<ProjectTools> tools;
+    private List<String> tools;
 
     public ProjectEntity() {
     }
 
-    public ProjectEntity(String name, String description, ProjectType type, boolean isPublic, String creator,
+    @JsonbCreator
+    public static ProjectEntity create(
+            @JsonbProperty("name") String name,
+            @JsonbProperty("description") String description,
+            @JsonbProperty("type") String type,
+            @JsonbProperty("public") boolean isPublic,
+            @JsonbProperty("creator") String creator,
+            @JsonbProperty("creator_iam_id") String creatorIamId,
+            @JsonbProperty("scope") ProjectScope scope,
+            @JsonbProperty("storage") ProjectStorage storage,
+            @JsonbProperty("compute") List<ProjectCompute> compute,
+            @JsonbProperty("github") Github github,
+            @JsonbProperty("settings") ProjectSettings settings,
+            @JsonbProperty("members") List<ProjectMember> members,
+            @JsonbProperty("tools") List<String> tools) {
+        return new ProjectEntity(name, description, type, isPublic, creator, creatorIamId, scope, storage, compute, github, settings, members, tools);
+    }
+
+    private ProjectEntity(String name, String description, String type, boolean isPublic, String creator,
             String creatorIamId, ProjectScope scope, ProjectStorage storage, List<ProjectCompute> compute,
-            Github github, ProjectSettings settings, List<ProjectMember> members, List<ProjectTools> tools) {
+            Github github, ProjectSettings settings, List<ProjectMember> members, List<String> tools) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -55,7 +74,7 @@ public class ProjectEntity {
         return description;
     }
 
-    public ProjectType getType() {
+    public String getType() {
         return type;
     }
 
@@ -95,10 +114,7 @@ public class ProjectEntity {
         return members;
     }
 
-    public List<ProjectTools> getTools() {
+    public List<String> getTools() {
         return tools;
     }
-    
-    
 }
-

@@ -1,44 +1,61 @@
 package br.com.bb.nia.ibm.resources.project.storage;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
 
 public class ProjectCommonCredentials {
-    @JsonProperty("api_key")
-    private String apikey;
-    @JsonProperty("service_id")
+    @JsonbProperty("api_key")
+    private String apiKey;
+    @JsonbProperty("service_id")
     private String serviceId;
-    @JsonProperty("access_key_id")
+    @JsonbProperty("access_key_id")
     private String accessKeyId;
-    @JsonProperty("secret_access_key")
+    @JsonbProperty("secret_access_key")
     private String secretAccessKey;
-    @JsonProperty("resource_key_crn")
+    @JsonbProperty("resource_key_crn")
     private String resourceKeyCrn;
-    
+
     public ProjectCommonCredentials() {
     }
+
+    @JsonbCreator
+    public static ProjectCommonCredentials create(
+            @JsonbProperty("api_key") String apiKey,
+            @JsonbProperty("service_id") String serviceId,
+            @JsonbProperty("access_key_id") String accessKeyId,
+            @JsonbProperty("secret_access_key") String secretAccessKey,
+            @JsonbProperty("resource_key_crn") String resourceKeyCrn) {
+        return new ProjectCommonCredentials(apiKey, serviceId, accessKeyId, secretAccessKey, resourceKeyCrn);
+    }
+
     
-    public ProjectCommonCredentials(String apikey, String serviceId, String accessKeyId, String secretAccessKey,
+
+    private ProjectCommonCredentials(String apiKey, String serviceId, String accessKeyId, String secretAccessKey,
             String resourceKeyCrn) {
-        this.apikey = apikey;
+        this.apiKey = apiKey;
         this.serviceId = serviceId;
         this.accessKeyId = accessKeyId;
         this.secretAccessKey = secretAccessKey;
         this.resourceKeyCrn = resourceKeyCrn;
     }
-    public String getApikey() {
-        return apikey;
+
+    public String getApiKey() {
+        return apiKey;
     }
+
     public String getServiceId() {
         return serviceId;
     }
+
     public String getAccessKeyId() {
         return accessKeyId;
     }
+
     public String getSecretAccessKey() {
         return secretAccessKey;
     }
+
     public String getResourceKeyCrn() {
         return resourceKeyCrn;
     }
-
 }

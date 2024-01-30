@@ -1,14 +1,25 @@
 package br.com.bb.nia.ibm.resources.project.storage;
 
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
+
 public class ProjectStorage {
-    private ProjectStorageType type;
+    private String type;
     private String guid;
     private ProjectStorageProperties properties;
 
     public ProjectStorage() {
     }
 
-    public ProjectStorageType getType() {
+    @JsonbCreator
+    public static ProjectStorage create(
+            @JsonbProperty("type") String type,
+            @JsonbProperty("guid") String guid,
+            @JsonbProperty("properties") ProjectStorageProperties properties) {
+        return new ProjectStorage(type, guid, properties);
+    }
+
+    public String getType() {
         return type;
     }
 
@@ -20,11 +31,9 @@ public class ProjectStorage {
         return properties;
     }
 
-    public ProjectStorage(ProjectStorageType type, String guid, ProjectStorageProperties properties) {
+    private ProjectStorage(String type, String guid, ProjectStorageProperties properties) {
         this.type = type;
         this.guid = guid;
         this.properties = properties;
     }
-
-    
 }

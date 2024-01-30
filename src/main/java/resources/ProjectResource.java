@@ -1,7 +1,9 @@
 package resources;
 
+import br.com.bb.nia.ibm.resources.project.Project;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -17,7 +19,12 @@ public class ProjectResource {
     @GET
     @Path("/")
     public Response test(){
-        projectService.teste();
-        return Response.noContent().build();
+        return Response.ok(projectService.teste()).build();
+    }
+
+    @POST
+    @Path("/")
+    public Response test_json(Project projeto){
+        return Response.status(Response.Status.CREATED).entity(projectService.teste_json(projeto)).build();
     }
 }

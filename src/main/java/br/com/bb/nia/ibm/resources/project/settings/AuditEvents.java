@@ -1,5 +1,8 @@
 package br.com.bb.nia.ibm.resources.project.settings;
 
+import jakarta.json.bind.annotation.JsonbCreator;
+import jakarta.json.bind.annotation.JsonbProperty;
+
 public class AuditEvents {
     private Boolean enabled;
 
@@ -7,12 +10,12 @@ public class AuditEvents {
         return enabled;
     }
 
-    public AuditEvents() {
+    @JsonbCreator
+    public static AuditEvents create(@JsonbProperty("enabled") Boolean enabled) {
+        return new AuditEvents(enabled);
     }
 
-    public AuditEvents(Boolean enabled) {
+    private AuditEvents(Boolean enabled) {
         this.enabled = enabled;
     }
-    
-
 }

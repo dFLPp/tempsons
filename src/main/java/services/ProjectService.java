@@ -1,31 +1,34 @@
 package services;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-
 import br.com.bb.nia.ibm.resources.project.Project;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
 
 @RequestScoped
 public class ProjectService {
 
-    public void teste() {
-
+    public Project teste() {
         try {
-            ObjectMapper mapper = new ObjectMapper()
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                    .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
-                    .findAndRegisterModules();
+            Jsonb mapper = JsonbBuilder.create();
+            return mapper.fromJson(this.projectModelMock(),  Project.class);
 
-            Project s = mapper.readValue(projectModelMock(), Project.class);
-            System.out.println(s.toString());
-            System.out.println(s.getEntity().getStorage().getProperties().getBucketRegion());
-            System.out.println(s.getEntity().getCompute().get(0).getType().getValue());
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("caiu no catch");
+            return null;
+        }
+    }
+
+    public Object teste_json(Project projeto) {
+        try {
+            Jsonb mapper = JsonbBuilder.create();
+            return mapper.toJson(projeto);
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
